@@ -21,11 +21,12 @@ struct ContentView: View {
     }
 
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            List(filteredItems, id: \.self) { item in
+                Text(item)
+            }
+            .navigationTitle("Images")
+            .searchable(text: $searchText, prompt: "Search for an image")
         }
     }
 }
