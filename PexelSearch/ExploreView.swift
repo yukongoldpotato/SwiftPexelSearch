@@ -24,6 +24,17 @@ struct ExploreView: View {
                                 .resizable()
                                 .aspectRatio(CGFloat(photo.width) / CGFloat(photo.height), contentMode: .fit)
                                 .cornerRadius(15)
+                                .overlay(alignment: .bottomTrailing) {
+                                    Button {
+                                        // TODO: implement save action here
+                                    } label: {
+                                        Image(systemName: "bookmark")
+                                            .padding(8)
+                                            .background(.ultraThinMaterial)
+                                            .clipShape(Circle())
+                                    }
+                                    .padding(4)
+                                }
                         default:
                             EmptyView()
                         }
