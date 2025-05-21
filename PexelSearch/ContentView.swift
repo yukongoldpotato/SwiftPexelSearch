@@ -8,25 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var searchText = ""
-    let allItems = ["Apple", "Banana", "Carrot", "Donkey", "Emu"]
-    var filteredItems: [String] {
-        if searchText.isEmpty {
-            return allItems
-        } else {
-            return allItems.filter {
-                $0.localizedCaseInsensitiveContains(searchText)
-            }
-        }
-    }
+    @State private var searcher = PhotoSearcher()
 
     var body: some View {
         NavigationStack {
-            List(filteredItems, id: \.self) { item in
-                Text(item)
+            List(searcher.photos) { photo in
+                AsyncImage(url: URL(string: photo.src.small))
             }
             .navigationTitle("Images")
-            .searchable(text: $searchText, prompt: "Search for an image")
+            .searchable(text: $searcher.searchText, prompt: "Search for an image")
+            .onSubmit(of: .search) {
+                searcher.performSearch()
+            }
         }
     }
 }
