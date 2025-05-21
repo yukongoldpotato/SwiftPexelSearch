@@ -15,7 +15,7 @@ class PexelsAPIService {
         self.session = session
     }
 
-    func searchPhotos(query: String, perPage: Int = 5, page: Int = 1) async throws -> PexelsSearchResponse {
+    func searchPhotos(query: String, perPage: Int = 20, page: Int = 1) async throws -> PexelsSearchResponse {
         guard let apiKey = APIKeyManager.pexelsAPIKey, !apiKey.isEmpty else {
             print("❌ Pexels API Key is missing or empty from APIKeyManager.")
             throw PexelsAPIError.apiKeyMissing
