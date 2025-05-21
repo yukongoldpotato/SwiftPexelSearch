@@ -6,13 +6,30 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		65F805902DDDC7240097D550 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 65F8058F2DDDC7240097D550 /* WaterfallGrid */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		65550E172DDD764C0086976A /* PexelSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PexelSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		65550E2B2DDD7F6A0086976A /* Exceptions for "PexelSearch" folder in "PexelSearch" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 65550E162DDD764C0086976A /* PexelSearch */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		65550E192DDD764C0086976A /* PexelSearch */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				65550E2B2DDD7F6A0086976A /* Exceptions for "PexelSearch" folder in "PexelSearch" target */,
+			);
 			path = PexelSearch;
 			sourceTree = "<group>";
 		};
@@ -23,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65F805902DDDC7240097D550 /* WaterfallGrid in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +83,7 @@
 			);
 			name = PexelSearch;
 			packageProductDependencies = (
+				65F8058F2DDDC7240097D550 /* WaterfallGrid */,
 			);
 			productName = PexelSearch;
 			productReference = 65550E172DDD764C0086976A /* PexelSearch.app */;
@@ -94,6 +113,9 @@
 			);
 			mainGroup = 65550E0E2DDD764C0086976A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				65F8058E2DDDC7240097D550 /* XCRemoteSwiftPackageReference "WaterfallGrid" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 65550E182DDD764C0086976A /* Products */;
 			projectDirPath = "";
@@ -127,6 +149,8 @@
 /* Begin XCBuildConfiguration section */
 		65550E232DDD764E0086976A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 65550E192DDD764C0086976A /* PexelSearch */;
+			baseConfigurationReferenceRelativePath = Keys.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -190,6 +214,8 @@
 		};
 		65550E242DDD764E0086976A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 65550E192DDD764C0086976A /* PexelSearch */;
+			baseConfigurationReferenceRelativePath = Keys.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -246,6 +272,8 @@
 		};
 		65550E262DDD764E0086976A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 65550E192DDD764C0086976A /* PexelSearch */;
+			baseConfigurationReferenceRelativePath = Keys.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -255,12 +283,13 @@
 				DEVELOPMENT_TEAM = CSL7X87579;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
+				INFOPLIST_FILE = PexelSearch/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_WKSupportsLiveActivityLaunchAttributeTypes = "\"\"";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -277,6 +306,8 @@
 		};
 		65550E272DDD764E0086976A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 65550E192DDD764C0086976A /* PexelSearch */;
+			baseConfigurationReferenceRelativePath = Keys.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -286,12 +317,13 @@
 				DEVELOPMENT_TEAM = CSL7X87579;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
+				INFOPLIST_FILE = PexelSearch/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_WKSupportsLiveActivityLaunchAttributeTypes = "\"\"";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -328,6 +360,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		65F8058E2DDDC7240097D550 /* XCRemoteSwiftPackageReference "WaterfallGrid" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/paololeonardi/WaterfallGrid";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		65F8058F2DDDC7240097D550 /* WaterfallGrid */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65F8058E2DDDC7240097D550 /* XCRemoteSwiftPackageReference "WaterfallGrid" */;
+			productName = WaterfallGrid;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 65550E0F2DDD764C0086976A /* Project object */;
 }
