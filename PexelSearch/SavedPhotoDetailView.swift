@@ -8,8 +8,31 @@
 import SwiftUI
 
 struct SavedPhotoDetailView: View {
+    let photo: SavedPhoto
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Group {
+                if let data = photo.imageData,
+                   let uiImage = UIImage(data: data) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(8)
+                }
+            }
+            .padding()
+
+            Text("Photographer: \(photo.photographer)")
+                .font(.headline)
+                .padding(.top, 4)
+
+            Text(photo.alt)
+                .font(.subheadline)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal)
+        }
+        .presentationDetents([.large])
     }
 }
 
