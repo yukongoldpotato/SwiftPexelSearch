@@ -7,15 +7,19 @@
 
 import SwiftUI
 import WaterfallGrid
+import SwiftData
 
 struct ExploreView: View {
     @State private var searcher = PhotoSearcher()
+    @Environment(\.modelContext) private var modelContext
+    @Query private var savedPhotos: [SavedPhoto]
+    @State private var selectedPhoto: Photo?
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 WaterfallGrid(searcher.photos, id: \.id) { photo in
-                    AsyncImage(url: URL(string: photo.src.medium)) { phase in
+                    AsyncImage(url: URL(string: photo.src.large)) { phase in
                         switch phase {
                         case .empty:
                             ProgressView()
@@ -25,10 +29,17 @@ struct ExploreView: View {
                                 .aspectRatio(CGFloat(photo.width) / CGFloat(photo.height), contentMode: .fit)
                                 .cornerRadius(15)
                                 .overlay(alignment: .bottomTrailing) {
+                                    let isSaved = savedPhotos.contains { $0.id == photo.id }
                                     Button {
-                                        // TODO: implement save action here
+                                        if isSaved {
+                                            if let existing = savedPhotos.first(where: { $0.id == photo.id }) {
+                                                modelContext.delete(existing)
+                                            }
+                                        } else {
+                                            Task { await downloadAndSave(photo: photo) }
+                                        }
                                     } label: {
-                                        Image(systemName: "bookmark")
+                                        Image(systemName: isSaved ? "bookmark.fill" : "bookmark")
                                             .padding(8)
                                             .background(.ultraThinMaterial)
                                             .clipShape(Circle())
@@ -40,6 +51,9 @@ struct ExploreView: View {
                         }
                     }
                     .frame(maxWidth: .infinity)
+                    .onTapGesture {
+                        selectedPhoto = photo
+                    }
                 }
                 .gridStyle(columns: 2, spacing: 6)
                 .padding(6)
@@ -49,6 +63,39 @@ struct ExploreView: View {
             .onSubmit(of: .search) {
                 searcher.performSearch()
             }
+            .sheet(item: $selectedPhoto) { selected in
+                let isSaved = savedPhotos.contains { $0.id == selected.id }
+                PhotoDetailView(
+                    photo: selected,
+                    isSaved: isSaved,
+                    toggleSave: {
+                        if isSaved {
+                            if let existing = savedPhotos.first(where: { $0.id == selected.id }) {
+                                modelContext.delete(existing)
+                            }
+                        } else {
+                            Task { await downloadAndSave(photo: selected) }
+                        }
+                    }
+                )
+            }
+        }
+    }
+
+    func downloadAndSave(photo: Photo) async {
+        do {
+            guard let url = URL(string: photo.src.large) else { return }
+            let (data, _) = try await URLSession.shared.data(from: url)
+            let saved = SavedPhoto(
+                id: photo.id,
+                photographer: photo.photographer,
+                originalURL: photo.url,
+                imageData: data,
+                alt: photo.alt
+            )
+            modelContext.insert(saved)
+        } catch {
+            print("Save error: \(error)")
         }
     }
 }
