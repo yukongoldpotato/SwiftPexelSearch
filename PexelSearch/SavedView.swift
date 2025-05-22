@@ -7,21 +7,37 @@
 
 import SwiftUI
 import SwiftData
+import WaterfallGrid
 
 struct SavedView: View {
     @Query var saved: [SavedPhoto]
+    @State private var selectedPhoto: SavedPhoto?
 
     var body: some View {
         NavigationStack {
-            //TODO: enable saving multiple images later
-            if let data = saved.first?.imageData,
-               let uiImage = UIImage(data: data) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+            ScrollView {
+                WaterfallGrid(saved, id: \.id) { photo in
+                    Group {
+                        if let data = photo.imageData,
+                           let uiImage = UIImage(data: data) {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .cornerRadius(8)
+                        }
+                    }
+                    .onTapGesture {
+                        selectedPhoto = photo
+                    }
+                }
+                .gridStyle(columns: 2, spacing: 6)
             }
-            Text("Saved items will appear here.")
-                .navigationTitle("Saved")
+            .navigationTitle("Saved")
+            .sheet(item: $selectedPhoto) { selected in
+                SavedPhotoDetailView(
+                    photo: selected
+                )
+            }
         }
     }
 }
