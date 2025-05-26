@@ -22,4 +22,15 @@ class PhotoSearcher {
             }
         }
     }
+
+    func performCuration() {
+        Task {
+            do {
+                let response = try await apiService.curatedPhotos()
+                self.photos = response.photos
+            } catch {
+                print("Error fetching curated photos: \(error)")
+            }
+        }
+    }
 }
