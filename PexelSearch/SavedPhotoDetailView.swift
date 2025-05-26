@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SavedPhotoDetailView: View {
     let photo: SavedPhoto
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         VStack {
@@ -31,6 +33,15 @@ struct SavedPhotoDetailView: View {
                 .font(.subheadline)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
+
+            Button(role: .destructive, action: {
+                modelContext.delete(photo)
+                dismiss()
+            }) {
+                Label("Delete", systemImage: "trash")
+            }
+            .buttonStyle(.borderedProminent)
+            .padding()
         }
         .presentationDetents([.large])
     }
