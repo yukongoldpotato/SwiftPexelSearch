@@ -79,6 +79,11 @@ struct ExploreView: View {
                     }
                 )
             }
+            .task {
+                // Load curated photos on first launch if no search query
+                guard searcher.searchText.isEmpty else { return }
+                searcher.performCuration()
+            }
         }
     }
 
