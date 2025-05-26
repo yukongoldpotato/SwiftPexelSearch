@@ -23,7 +23,7 @@ struct SavedView: View {
                             Image(uiImage: uiImage)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .cornerRadius(8)
+                                .cornerRadius(15)
                         }
                     }
                     .onTapGesture {
@@ -31,6 +31,7 @@ struct SavedView: View {
                     }
                 }
                 .gridStyle(columns: 2, spacing: 6)
+                .padding(6)
             }
             .navigationTitle("Saved")
             .sheet(item: $selectedPhoto) { selected in
