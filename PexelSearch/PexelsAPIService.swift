@@ -92,4 +92,29 @@ class PexelsAPIService {
             }
         }
     }
+
+    func curatedPhotos(perPage: Int = 20, page: Int = 1) async throws -> PexelsSearchResponse {
+        let endpoint = "curated"
+        var components = URLComponents(string: baseURL + endpoint)
+        components?.queryItems = [
+            URLQueryItem(name: "per_page", value: String(perPage)),
+            URLQueryItem(name: "page", value: String(page))
+        ]
+
+        guard let url = components?.url else {
+            throw PexelsAPIError.invalidURL
+        }
+
+        var request = URLRequest(url: url)
+        request.setValue(APIKeyManager.pexelsAPIKey, forHTTPHeaderField: "Authorization")
+        request.httpMethod = "GET"
+
+        let (data, response) = try await session.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+            throw PexelsAPIError.httpError(statusCode: (response as? HTTPURLResponse)?.statusCode ?? -1)
+        }
+
+        let decoder = JSONDecoder()
+        return try decoder.decode(PexelsSearchResponse.self, from: data)
+    }
 }
