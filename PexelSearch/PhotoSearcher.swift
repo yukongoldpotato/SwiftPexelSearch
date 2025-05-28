@@ -19,6 +19,9 @@ class PhotoSearcher {
             do {
                 let response = try await apiService.searchPhotos(query: searchText)
                 self.photos = response.photos
+            } catch {
+                print("Error searching photos for query '\(searchText)': \(error)")
+                self.photos = []
             }
         }
     }
